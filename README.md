@@ -20,9 +20,14 @@ Trang pháp lý công khai của app **EngJourney** (dự án cá nhân), phục
 
 ## Cần kiểm tra lại trước khi submit
 
-Nội dung hiện tại đang giả định app dùng **Firebase** (Auth/Analytics/Crashlytics/Firestore) và **IAP qua App Store + Google Play**. Nếu stack thực tế khác (Supabase, RevenueCat, AdMob, đăng nhập Facebook...), phải sửa mục "Third-party services" trong `privacy.html` cho khớp — Google Play đối chiếu nội dung này với khai báo Data Safety.
+Nội dung đang khai theo stack thực tế: **Supabase** (đăng nhập + dữ liệu), **Firebase** (Analytics + Crashlytics), **Google AdMob** (quảng cáo), **IAP qua App Store + Google Play**. Nếu sau này đổi/thêm dịch vụ, phải sửa mục "Third-party services" trong `privacy.html` cho khớp — Google Play đối chiếu nội dung này với khai báo Data Safety.
 
-Ngoài ra cần đảm bảo app **thật sự có** luồng `Settings → Account → Delete account` như trang delete-account mô tả; Google Play bắt buộc có đường xoá tài khoản ngay trong app, không chỉ qua web.
+Hai thứ phải có trong app trước khi submit, nếu không sẽ bị từ chối:
+
+1. **Luồng xoá tài khoản trong app** (`Settings → Account → Delete account`) đúng như trang `delete-account.html` mô tả. Google Play bắt buộc có đường xoá ngay trong app, không chỉ qua web.
+2. **Consent screen cho quảng cáo** ở EEA/UK/Thuỵ Sĩ (Google UMP SDK) và **ATT prompt** trên iOS. Trang privacy đã cam kết có hai thứ này.
+
+Khai Data Safety trên Play nhớ tick **Device or other IDs** vì AdMob thu thập Advertising ID.
 
 ## Cấu trúc
 
